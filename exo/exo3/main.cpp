@@ -22,12 +22,11 @@ int Snake::Init(const char *WindowName, int Width, int Height){
         printf("Erreur lors de la creation d'un renderer : %s",SDL_GetError());
         return EXIT_FAILURE;
     }
-
-    SDL_SetRenderDrawColor(renderer,255,0,0,255);//Couleur rouge
-    SDL_Rect rect = {100, 100, 100, 100};
-    SDL_RenderFillRect(renderer, &rect); 
+    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer,255,0,0,255);//red color
+    SDL_Rect rect = {200, 200, 100, 100}; //x y w h
+    SDL_RenderFillRect(renderer, &rect);
     SDL_RenderPresent(renderer);
-
     do {
         SDL_WaitEvent(&event);
     }while(event.type != SDL_QUIT);
@@ -42,7 +41,7 @@ int Snake::GetRenderer(){
 
 Snake::~Snake() {
     SDL_DestroyWindow(window);
-    //SDL_DestroyRenderer(renderer); 
+    SDL_DestroyRenderer(renderer); 
     SDL_Quit();
 }
 
