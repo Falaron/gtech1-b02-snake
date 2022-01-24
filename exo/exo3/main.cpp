@@ -2,6 +2,13 @@
 
 int Snake::Init(const char *WindowName, int Width, int Height){
     SDL_Event event;
+    Uint32 frame_rate, frame_time = 50;
+
+    X = 100;
+    Y = 100;
+    directionY = 0;
+    directionX = 10;
+    int closeRequest = 0;
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
         printf("Error while initializing SDL : %s", SDL_GetError());
@@ -23,21 +30,73 @@ int Snake::Init(const char *WindowName, int Width, int Height){
         return EXIT_FAILURE;
     }
 
-    SDL_SetRenderDrawColor(renderer,255,0,0,255);//Couleur rouge
-    SDL_Rect rect = {100, 100, 100, 100};
-    SDL_RenderFillRect(renderer, &rect); 
-    SDL_RenderPresent(renderer);
+    SDL_RenderClear(renderer);
+    Draw();
 
-    do {
+    while(closeRequest == 0){
+
+        Uint32 frame_time_start = SDL_GetTicks();
+
         SDL_WaitEvent(&event);
-    }while(event.type != SDL_QUIT);
+
+        CheckKeys();
+        Draw();
+
+        frame_time = SDL_GetTicks() - frame_time_start;
+
+        /*if ( frame_time < frame_rate )
+		{
+			SDL_Delay( frame_rate - frame_time + 1 );
+		}*/
+        SDL_Delay(1000);
+    }
      
     return EXIT_FAILURE;
 }
 
+void Snake::Draw(){
+    SDL_SetRenderDrawColor(renderer,0,0,0,0);
+    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer,255,255,255,255);
+    SDL_Rect rect = {X, Y, 50, 50};
+    SDL_RenderFillRect(renderer, &rect); 
+    SDL_RenderPresent(renderer);
+}
+
+void Snake::CheckKeys(){
+    const Uint8 *keystates = SDL_GetKeyboardState(NULL);
+
+    if (keystates[SDL_SCANCODE_UP]) {
+        Y -= 10;
+        directionX = 0;
+        directionY = -10;
+        return;
+    }
+    if (keystates[SDL_SCANCODE_DOWN]) {
+        Y += 10;
+        directionX = 0;
+        directionY = 10;
+        return;
+    }
+    if (keystates[SDL_SCANCODE_LEFT]) {
+        X -= 10;
+        directionX = -10;
+        directionY = 0;
+        return;
+    }
+    if (keystates[SDL_SCANCODE_RIGHT]) {
+        X += 10;
+        directionX = 10;
+        directionY = 0;
+        return;
+    }
+
+    X += directionX;
+    Y += directionY;
+}
+
 int Snake::GetRenderer(){
-    return 0;
-    //return this->renderer;
+    return 1;
 }
 
 Snake::~Snake() {

@@ -3,6 +3,8 @@
 class Snake {
     public:
         int Init(const char *WindowName, int Width, int Height);
+        void CheckKeys();
+        void Draw();
         int GetRenderer();
 
         ~Snake();
@@ -14,4 +16,6 @@ class Snake {
         int score;
         int X;
         int Y;
+        int directionX;
+        int directionY;
 };
