@@ -32,23 +32,26 @@ int Snake::Init(const char *WindowName, int Width, int Height){
 
     SDL_RenderClear(renderer);
     Draw();
+    SDL_WaitEvent(&event);
 
     while(closeRequest == 0){
 
         Uint32 frame_time_start = SDL_GetTicks();
 
-        SDL_WaitEvent(&event);
+        SDL_PollEvent(&event);
 
         CheckKeys();
         Draw();
 
         frame_time = SDL_GetTicks() - frame_time_start;
 
-        /*if ( frame_time < frame_rate )
+        if ( frame_time < frame_rate )
 		{
-			SDL_Delay( frame_rate - frame_time + 1 );
-		}*/
-        SDL_Delay(1000);
+			//SDL_Delay( frame_rate - frame_time + 1000 );
+            SDL_Delay(50);
+            printf("%d", frame_rate - frame_time);
+		}
+        SDL_Delay(50);
     }
      
     return EXIT_FAILURE;
