@@ -5,6 +5,7 @@ class Snake {
         int Init(const char *WindowName, int Width, int Height);
         void CheckKeys();
         void Draw();
+        void Grid();
         int GetRenderer();
 
         ~Snake();

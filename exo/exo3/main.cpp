@@ -9,7 +9,6 @@ int Snake::Init(const char *WindowName, int Width, int Height){
     directionY = 0;
     directionX = 10;
     closeRequest = 0;
-    
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
         printf("Error while initializing SDL : %s", SDL_GetError());
@@ -32,13 +31,15 @@ int Snake::Init(const char *WindowName, int Width, int Height){
     }
 
     SDL_RenderClear(renderer);
+    Grid();
     Draw();
+    SDL_WaitEvent(&event);
 
     while(closeRequest == 0){
 
         Uint32 frame_time_start = SDL_GetTicks();
 
-        SDL_WaitEvent(&event);
+        SDL_PollEvent(&event);
 
         CheckKeys();
         Draw();
@@ -47,9 +48,9 @@ int Snake::Init(const char *WindowName, int Width, int Height){
 
         if ( frame_time < frame_rate )
 		{
-			SDL_Delay( frame_rate - frame_time + 1 );
+            continue;
 		}
-        SDL_Delay(1000);
+        SDL_Delay(50);
     }
      
     return EXIT_FAILURE;
@@ -62,6 +63,10 @@ void Snake::Draw(){
     SDL_Rect rect = {X, Y, 50, 50};
     SDL_RenderFillRect(renderer, &rect); 
     SDL_RenderPresent(renderer);
+}
+
+void Snake::Grid(){
+    //code
 }
 
 void Snake::CheckKeys(){
