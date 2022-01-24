@@ -8,7 +8,7 @@ int Snake::Init(const char *WindowName, int Width, int Height){
     Y = 100;
     directionY = 0;
     directionX = 10;
-    int closeRequest = 0;
+    closeRequest = 0;
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
         printf("Error while initializing SDL : %s", SDL_GetError());
@@ -47,9 +47,7 @@ int Snake::Init(const char *WindowName, int Width, int Height){
 
         if ( frame_time < frame_rate )
 		{
-			//SDL_Delay( frame_rate - frame_time + 1000 );
-            SDL_Delay(50);
-            printf("%d", frame_rate - frame_time);
+			//SDL_Delay( frame_rate - frame_time + 1 );
 		}
         SDL_Delay(50);
     }
@@ -93,6 +91,10 @@ void Snake::CheckKeys(){
         directionY = 0;
         return;
     }
+    if (keystates[SDL_SCANCODE_ESCAPE]) {
+        closeRequest = !closeRequest;
+        return;
+    }
 
     X += directionX;
     Y += directionY;
@@ -104,7 +106,7 @@ int Snake::GetRenderer(){
 
 Snake::~Snake() {
     SDL_DestroyWindow(window);
-    //SDL_DestroyRenderer(renderer); 
+    SDL_DestroyRenderer(renderer); 
     SDL_Quit();
 }
 

@@ -18,4 +18,5 @@ class Snake {
         int Y;
         int directionX;
         int directionY;
+        int closeRequest;
 };
