@@ -8,6 +8,7 @@ int Snake::Init(const char *WindowName, int Width, int Height){
     Y = 100;
     directionY = 0;
     directionX = 10;
+    closeRequest = 0;
     
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
