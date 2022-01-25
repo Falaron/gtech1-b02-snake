@@ -14,10 +14,13 @@ class Snake {
         SDL_Window *window;
         SDL_Renderer *renderer;
 
+        int doOnce;
+
         int score;
         int X;
         int Y;
         int directionX;
         int directionY;
         int closeRequest;
+        int speed;
 };

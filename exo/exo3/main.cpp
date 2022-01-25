@@ -2,13 +2,16 @@
 
 int Snake::Init(const char *WindowName, int Width, int Height){
     SDL_Event event;
-    Uint32 frame_rate, frame_time = 50;
+    Uint32 frame_rate = 20;
+    Uint32 frame_time_start, frame_time;
+    int doOnce = 0;
 
     X = 100;
     Y = 100;
     directionY = 0;
-    directionX = 10;
+    directionX = 3;
     closeRequest = 0;
+    speed = 3;
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
         printf("Error while initializing SDL : %s", SDL_GetError());
@@ -31,13 +34,13 @@ int Snake::Init(const char *WindowName, int Width, int Height){
     }
 
     SDL_RenderClear(renderer);
-    Grid();
+    
     Draw();
     SDL_WaitEvent(&event);
 
     while(closeRequest == 0){
 
-        Uint32 frame_time_start = SDL_GetTicks();
+        frame_time_start = SDL_GetTicks();
 
         SDL_PollEvent(&event);
 
@@ -48,16 +51,36 @@ int Snake::Init(const char *WindowName, int Width, int Height){
 
         if ( frame_time < frame_rate )
 		{
-            continue;
+			//SDL_Delay( frame_rate - frame_time + 1 );
+            /*printf("frame time : %d\n", frame_time);
+            printf("frame rate : %d\n", frame_rate);
+            printf("%d\n", frame_rate - frame_time);*/
+            SDL_Delay(frame_rate - frame_time);
 		}
-        SDL_Delay(50);
     }
      
     return EXIT_FAILURE;
 }
 
 void Snake::Draw(){
-    SDL_SetRenderDrawColor(renderer,0,0,0,0);
+
+    //Print Grid
+    if (doOnce == 0)
+    {
+        SDL_SetRenderDrawColor(renderer,0,0,0,0);
+        SDL_RenderClear(renderer);
+        for (int y = 0; y < 500; y+=50) {
+            for (int x = 0; x < 500; x+=50){
+                SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
+                SDL_Rect gridRect = {x, y, 50, 50};
+                SDL_RenderDrawRect(renderer, &gridRect);
+                SDL_RenderPresent(renderer);
+            }
+        }
+        doOnce = 1;
+    }
+
+    //Print Snake
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer,255,255,255,255);
     SDL_Rect rect = {X, Y, 50, 50};
@@ -65,34 +88,29 @@ void Snake::Draw(){
     SDL_RenderPresent(renderer);
 }
 
-void Snake::Grid(){
-    //code
-}
-
 void Snake::CheckKeys(){
     const Uint8 *keystates = SDL_GetKeyboardState(NULL);
-
     if (keystates[SDL_SCANCODE_UP]) {
-        Y -= 10;
+        Y += -speed;
         directionX = 0;
-        directionY = -10;
+        directionY = -speed;
         return;
     }
     if (keystates[SDL_SCANCODE_DOWN]) {
-        Y += 10;
+        Y += speed;
         directionX = 0;
-        directionY = 10;
+        directionY = speed;
         return;
     }
     if (keystates[SDL_SCANCODE_LEFT]) {
-        X -= 10;
-        directionX = -10;
+        X += -speed;
+        directionX = -speed;
         directionY = 0;
         return;
     }
     if (keystates[SDL_SCANCODE_RIGHT]) {
-        X += 10;
-        directionX = 10;
+        X += speed;
+        directionX = speed;
         directionY = 0;
         return;
     }
