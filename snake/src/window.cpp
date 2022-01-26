@@ -61,23 +61,34 @@ int Window::Refresh(){
 
 void Window::CheckKeys(){
     const Uint8 *keystates = SDL_GetKeyboardState(NULL);
+    
 
-    if (keystates[SDL_SCANCODE_UP]) {
-        printf("Up\n");
-        return;
+    if(doOnce == 0){
+        if (keystates[SDL_SCANCODE_UP]) {
+            printf("Up\n");
+            doOnce = 1;
+            return;
+        }
+        if (keystates[SDL_SCANCODE_DOWN]) {
+            printf("Down\n");
+            doOnce = 1;
+            return;
+        }
+        if (keystates[SDL_SCANCODE_LEFT]) {
+            printf("Left\n");
+            doOnce = 1;
+            return;
+        }
+        if (keystates[SDL_SCANCODE_RIGHT]) {
+            printf("Right\n");
+            doOnce = 1;
+            return;
+        }
     }
-    if (keystates[SDL_SCANCODE_DOWN]) {
-        printf("Down\n");
-        return;
+    if(event.type != SDL_KEYDOWN){
+        doOnce = 0;
     }
-    if (keystates[SDL_SCANCODE_LEFT]) {
-        printf("Left\n");
-        return;
-    }
-    if (keystates[SDL_SCANCODE_RIGHT]) {
-        printf("Right\n");
-        return;
-    }
+
     if (keystates[SDL_SCANCODE_ESCAPE]) {
         closeRequest = 1;
         return;
