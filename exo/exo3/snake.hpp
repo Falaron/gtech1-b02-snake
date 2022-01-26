@@ -7,6 +7,7 @@ class Snake {
         void Draw();
         void Grid();
         int GetRenderer();
+        int ConvertPosition(int rectX, int rectY);
 
         ~Snake();
 
@@ -19,8 +20,16 @@ class Snake {
         int score;
         int X;
         int Y;
+        int totalCol;
+        int totalRow;
+        int coordX;
+        int coordY;
+        int rectX;
+        int rectY;
         int directionX;
         int directionY;
         int closeRequest;
         int speed;
+        int keyPressed;
+        SDL_Event event;
 };
