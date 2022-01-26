@@ -63,28 +63,22 @@ int Snake::Init(const char *WindowName, int Width, int Height){
 }
 
 void Snake::Draw(){
-
-    //Print Grid
-    if (doOnce == 0)
-    {
-        SDL_SetRenderDrawColor(renderer,0,0,0,0);
-        SDL_RenderClear(renderer);
-        for (int y = 0; y < 500; y+=50) {
-            for (int x = 0; x < 500; x+=50){
-                SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
-                SDL_Rect gridRect = {x, y, 50, 50};
-                SDL_RenderDrawRect(renderer, &gridRect);
-                SDL_RenderPresent(renderer);
-            }
+    SDL_SetRenderDrawColor(renderer,0,0,0,0);
+    SDL_RenderClear(renderer);
+    
+    for (int y = 0; y < 500; y+=50) {
+        for (int x = 0; x < 500; x+=50){
+            SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
+            SDL_Rect gridRect = {x, y, 50, 50};
+            SDL_RenderDrawRect(renderer, &gridRect);
         }
-        doOnce = 1;
     }
 
     //Print Snake
-    SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer,255,255,255,255);
     SDL_Rect rect = {X, Y, 50, 50};
     SDL_RenderFillRect(renderer, &rect); 
+
     SDL_RenderPresent(renderer);
 }
 
