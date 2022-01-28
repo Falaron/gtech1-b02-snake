@@ -1,7 +1,7 @@
 #include "../include/window.hpp"
 
 int Window::New(const char *WindowName, int Width, int Height){
-    frame_rate = 20;
+    frame_rate = 60;
     closeRequest = 0;
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
@@ -37,7 +37,10 @@ int Window::Destroy(){
     return EXIT_FAILURE;
 }
 
-int Window::Draw(){
+int Window::Draw(int SnakeX, int SnakeY){
+    printf("%d/%d", SnakeX, SnakeY);
+    SDL_SetRenderDrawColor(renderer,0,0,0,0);
+    SDL_RenderClear(renderer);
 
     for(int row=0; row<10; row++){
         for(int column=0; column<10; column++){
@@ -50,6 +53,10 @@ int Window::Draw(){
             SDL_RenderFillRect(renderer, &rect); 
         }
     }
+
+    SDL_SetRenderDrawColor(renderer,255,255,255,255);
+    SDL_Rect rect = {SnakeX*500/10, SnakeY*500/10, 500/10, 500/10};
+    SDL_RenderFillRect(renderer, &rect); 
 
     return 1;
 }
@@ -64,19 +71,23 @@ void Window::CheckKeys(){
 
     if (keystates[SDL_SCANCODE_UP]) {
         printf("Up\n");
-        return;
+        DirectionX = 0;
+        DirectionY = 1;
     }
     if (keystates[SDL_SCANCODE_DOWN]) {
         printf("Down\n");
-        return;
+        DirectionX = 0;
+        DirectionY = -1;
     }
     if (keystates[SDL_SCANCODE_LEFT]) {
         printf("Left\n");
-        return;
+        DirectionX = -1;
+        DirectionY = 0;
     }
     if (keystates[SDL_SCANCODE_RIGHT]) {
         printf("Right\n");
-        return;
+        DirectionX = 1;
+        DirectionY = 0;
     }
     if (keystates[SDL_SCANCODE_ESCAPE]) {
         closeRequest = 1;

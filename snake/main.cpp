@@ -27,7 +27,8 @@ int main(void){
 		{
 
             main_window.CheckKeys();
-            main_window.Draw();
+            snake.Move(main_window.DirectionX, main_window.DirectionY);
+            main_window.Draw(snake.PositionY, snake.PositionY);
             main_window.Refresh();
 
             SDL_Delay(main_window.frame_rate - main_window.frame_time);

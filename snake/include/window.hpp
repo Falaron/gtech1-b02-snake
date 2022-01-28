@@ -3,10 +3,13 @@
 class Window {
     public:
         int New(const char *WindowName, int Width, int Height);
-        int Draw();
+        int Draw(int X, int Y);
         int Refresh();
         int Destroy();
         void CheckKeys();
+
+        int DirectionX;
+        int DirectionY;
 
         SDL_Event event;
         int closeRequest;
