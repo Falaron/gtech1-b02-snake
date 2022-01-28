@@ -6,7 +6,7 @@ int main(void){
     Window main_window;
     Snake snake_obj;
     main_window.New("Snake", 500, 500);
-    snake_obj.New();
+    snake_obj.New(main_window);
 
     while(main_window.closeRequest == 0){
 

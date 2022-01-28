@@ -1,7 +1,7 @@
 #include "../include/snake.hpp"
 #include <stdio.h>
 
-int Snake::New(){
+int Snake::New(int MaxLen){
     PosX = 0;
     PosY = 0;
     Size = 1;
@@ -23,7 +23,7 @@ int Snake::CheckCollide(){
 
 void Snake::Eat(){
 
-    Size += 1
+    Size += 1;
 
     return;
 };
