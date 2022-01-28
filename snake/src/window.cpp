@@ -51,6 +51,12 @@ int Window::Draw(){
         }
     }
 
+    //Print Snake
+    SDL_SetRenderDrawColor(renderer,255,255,255,255);
+    SDL_Rect rect = {100, 100, 50, 50};
+    SDL_RenderFillRect(renderer, &rect); 
+    SDL_RenderPresent(renderer);
+
     return 1;
 }
 
@@ -63,30 +69,25 @@ void Window::CheckKeys(){
     const Uint8 *keystates = SDL_GetKeyboardState(NULL);
     
 
-    if(doOnce == 0){
-        if (keystates[SDL_SCANCODE_UP]) {
-            printf("Up\n");
-            doOnce = 1;
-            return;
-        }
-        if (keystates[SDL_SCANCODE_DOWN]) {
-            printf("Down\n");
-            doOnce = 1;
-            return;
-        }
-        if (keystates[SDL_SCANCODE_LEFT]) {
-            printf("Left\n");
-            doOnce = 1;
-            return;
-        }
-        if (keystates[SDL_SCANCODE_RIGHT]) {
-            printf("Right\n");
-            doOnce = 1;
-            return;
-        }
+    if (keystates[SDL_SCANCODE_UP]) {
+        printf("Up\n");
+        doOnce = 1;
+        return;
     }
-    if(event.type != SDL_KEYDOWN){
-        doOnce = 0;
+    if (keystates[SDL_SCANCODE_DOWN]) {
+        printf("Down\n");
+        doOnce = 1;
+        return;
+    }
+    if (keystates[SDL_SCANCODE_LEFT]) {
+        printf("Left\n");
+        doOnce = 1;
+        return;
+    }
+    if (keystates[SDL_SCANCODE_RIGHT]) {
+        printf("Right\n");
+        doOnce = 1;
+        return;
     }
 
     if (keystates[SDL_SCANCODE_ESCAPE]) {
