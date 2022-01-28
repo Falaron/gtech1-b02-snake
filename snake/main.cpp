@@ -26,7 +26,7 @@ int main(void){
 
         if ( main_window.frame_time < main_window.frame_rate )
 		{
-
+            snake.CheckCollide(main_window.winWidth, main_window.winHeight);
             main_window.CheckKeys();
             snake_obj.Move(main_window.DirectionX, main_window.DirectionY);
             snake_obj.Eat();

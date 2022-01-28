@@ -17,7 +17,8 @@ void Snake::Move(int DirectionX, int DirectionY){
     PosY += DirectionY;
 };
 
-int Snake::CheckCollide(){
+int Snake::CheckCollide(int winWidth, int winHeight){
+    //posX posY if( < winWidth)
     return 1;
 };
 

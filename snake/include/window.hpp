@@ -8,6 +8,8 @@ class Window {
         int Destroy();
         void CheckKeys();
 
+        int winWidth, winHeight;
+
         int DirectionX;
         int DirectionY;
 
@@ -21,4 +23,5 @@ class Window {
         SDL_Renderer *renderer;
 
         int Size;
+        int doOnce;
 };

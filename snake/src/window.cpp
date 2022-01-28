@@ -19,6 +19,9 @@ int Window::New(const char *WindowName, int Width, int Height){
         return 1;
     }
 
+    //check windows size
+    SDL_GetWindowSize(window, &winWidth, &winHeight);
+
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
     if(renderer == NULL)
@@ -71,6 +74,7 @@ int Window::Refresh(){
 
 void Window::CheckKeys(){
     const Uint8 *keystates = SDL_GetKeyboardState(NULL);
+    
 
     if (keystates[SDL_SCANCODE_UP]) {
         printf("Up\n");
@@ -92,6 +96,7 @@ void Window::CheckKeys(){
         DirectionX = 1;
         DirectionY = 0;
     }
+
     if (keystates[SDL_SCANCODE_ESCAPE]) {
         closeRequest = 1;
         return;
