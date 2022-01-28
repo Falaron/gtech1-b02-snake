@@ -4,11 +4,9 @@ class Snake {
         void Move(int X, int Y);
         int CheckCollide();
         void Eat();
-        void CheckKeys();
 
-        int PositionX;
-        int PositionY;
-
+        int PosY;
+        int PosX;
     private:
         int Size;
         int Direction;

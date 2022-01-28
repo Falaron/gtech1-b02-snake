@@ -4,8 +4,9 @@
 
 int main(void){
     Window main_window;
-    Snake snake;
+    Snake snake_obj;
     main_window.New("Snake", 500, 500);
+    snake_obj.New();
 
     while(main_window.closeRequest == 0){
 
@@ -27,8 +28,9 @@ int main(void){
 		{
 
             main_window.CheckKeys();
-            snake.Move(main_window.DirectionX, main_window.DirectionY);
-            main_window.Draw(snake.PositionY, snake.PositionY);
+            snake_obj.Move(main_window.DirectionX, main_window.DirectionY);
+            snake_obj.Eat();
+            main_window.Draw(snake_obj.PosX, snake_obj.PosY);
             main_window.Refresh();
 
             SDL_Delay(main_window.frame_rate - main_window.frame_time);

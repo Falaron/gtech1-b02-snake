@@ -1,8 +1,11 @@
 #include "../include/window.hpp"
 
 int Window::New(const char *WindowName, int Width, int Height){
-    frame_rate = 60;
+    frame_rate = 120;
     closeRequest = 0;
+    DirectionX = 0;
+    DirectionY = 0;
+    Size = 25;
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
         printf("Error while initializing SDL : %s", SDL_GetError());
@@ -38,24 +41,24 @@ int Window::Destroy(){
 }
 
 int Window::Draw(int SnakeX, int SnakeY){
-    printf("%d/%d", SnakeX, SnakeY);
+    printf("%d/%d\n", SnakeX, SnakeY);
     SDL_SetRenderDrawColor(renderer,0,0,0,0);
     SDL_RenderClear(renderer);
 
-    for(int row=0; row<10; row++){
-        for(int column=0; column<10; column++){
+    for(int row=0; row<Size; row++){
+        for(int column=0; column<Size; column++){
             if(row == column || row%2 == 0 && column%2 == 0 || column%2 == 1 && row%2 == 1){
                 SDL_SetRenderDrawColor(renderer,83,255,184,100);
             }else{
                 SDL_SetRenderDrawColor(renderer,65,232,121,91);
             }
-            SDL_Rect rect = {row*500/10, column*500/10, 500/10, 500/10};
+            SDL_Rect rect = {row*500/Size, column*500/Size, 500/Size, 500/Size};
             SDL_RenderFillRect(renderer, &rect); 
         }
     }
 
     SDL_SetRenderDrawColor(renderer,255,255,255,255);
-    SDL_Rect rect = {SnakeX*500/10, SnakeY*500/10, 500/10, 500/10};
+    SDL_Rect rect = {SnakeX*500/Size, SnakeY*500/Size, 500/Size, 500/Size};
     SDL_RenderFillRect(renderer, &rect); 
 
     return 1;
@@ -72,12 +75,12 @@ void Window::CheckKeys(){
     if (keystates[SDL_SCANCODE_UP]) {
         printf("Up\n");
         DirectionX = 0;
-        DirectionY = 1;
+        DirectionY = -1;
     }
     if (keystates[SDL_SCANCODE_DOWN]) {
         printf("Down\n");
         DirectionX = 0;
-        DirectionY = -1;
+        DirectionY = 1;
     }
     if (keystates[SDL_SCANCODE_LEFT]) {
         printf("Left\n");
