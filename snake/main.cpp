@@ -25,9 +25,10 @@ int main(void){
 
         if ( main_window.frame_time < main_window.frame_rate )
 		{
-
+            snake.CheckCollide(main_window.winWidth, main_window.winHeight);
             main_window.CheckKeys();
-            main_window.Draw();
+            snake.Move(main_window.DirectionX, main_window.DirectionY);
+            main_window.Draw(snake.PositionY, snake.PositionY);
             main_window.Refresh();
 
             SDL_Delay(main_window.frame_rate - main_window.frame_time);

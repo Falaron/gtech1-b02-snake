@@ -1,17 +1,24 @@
 #include "../include/snake.hpp"
+#include <stdio.h>
+
 
 int Snake::New(){
-    return 1;
-}
+    PositionX = 5;
+    PositionY = 5;
 
-void Snake::Move(){
-    return;
-}
-
-int Snake::CheckCollide(){
     return 1;
-}
+};
+
+void Snake::Move(int DirectionX, int DirectionY){
+    PositionX += DirectionX;
+    PositionY += DirectionY;
+};
+
+int Snake::CheckCollide(int winWidth, int winHeight){
+    //posX posY if( < winWidth)
+    return 1;
+};
 
 void Snake::Eat(){
     return;
-}
+};

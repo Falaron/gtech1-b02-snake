@@ -1,7 +1,7 @@
 #include "../include/window.hpp"
 
 int Window::New(const char *WindowName, int Width, int Height){
-    frame_rate = 20;
+    frame_rate = 60;
     closeRequest = 0;
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
@@ -15,6 +15,9 @@ int Window::New(const char *WindowName, int Width, int Height){
         printf("Couldn't create window : %s", SDL_GetError());
         return 1;
     }
+
+    //check windows size
+    SDL_GetWindowSize(window, &winWidth, &winHeight);
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
@@ -37,7 +40,10 @@ int Window::Destroy(){
     return EXIT_FAILURE;
 }
 
-int Window::Draw(){
+int Window::Draw(int SnakeX, int SnakeY){
+    printf("%d/%d", SnakeX, SnakeY);
+    SDL_SetRenderDrawColor(renderer,0,0,0,0);
+    SDL_RenderClear(renderer);
 
     for(int row=0; row<10; row++){
         for(int column=0; column<10; column++){
@@ -51,12 +57,9 @@ int Window::Draw(){
         }
     }
 
-    //Print Snake
     SDL_SetRenderDrawColor(renderer,255,255,255,255);
-    SDL_Rect rect = {100, 100, 50, 50};
-    SDL_RenderFillRect(renderer, &rect); 
-    SDL_RenderPresent(renderer);
-
+    SDL_Rect rect = {SnakeX*500/10, SnakeY*500/10, 500/10, 500/10};
+    SDL_RenderFillRect(renderer, &rect);
     return 1;
 }
 
@@ -71,23 +74,23 @@ void Window::CheckKeys(){
 
     if (keystates[SDL_SCANCODE_UP]) {
         printf("Up\n");
-        doOnce = 1;
-        return;
+        DirectionX = 0;
+        DirectionY = 1;
     }
     if (keystates[SDL_SCANCODE_DOWN]) {
         printf("Down\n");
-        doOnce = 1;
-        return;
+        DirectionX = 0;
+        DirectionY = -1;
     }
     if (keystates[SDL_SCANCODE_LEFT]) {
         printf("Left\n");
-        doOnce = 1;
-        return;
+        DirectionX = -1;
+        DirectionY = 0;
     }
     if (keystates[SDL_SCANCODE_RIGHT]) {
         printf("Right\n");
-        doOnce = 1;
-        return;
+        DirectionX = 1;
+        DirectionY = 0;
     }
 
     if (keystates[SDL_SCANCODE_ESCAPE]) {
