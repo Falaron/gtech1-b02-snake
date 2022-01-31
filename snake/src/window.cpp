@@ -73,6 +73,30 @@ int Window::Draw(int SnakeX, int SnakeY, int FruitX, int FruitY){
     SDL_Rect fruit = {FruitX*500/Size, FruitY*500/Size, 500/Size, 500/Size};
     SDL_RenderFillRect(renderer, &fruit);
 
+    //Draw Score
+    TTF_Font* Sans = TTF_OpenFont("ariali.ttf", 24);
+    SDL_Color White = {255, 255, 255};
+
+    // as TTF_RenderText_Solid could only be used on
+    // SDL_Surface then you have to create the surface first
+    SDL_Surface* surfaceMessage =
+        TTF_RenderText_Solid(Sans, "put your text here", White); 
+
+    // now you can convert it into a texture
+    SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+
+    SDL_Rect Message_rect; //create a rect
+    Message_rect.x = 0;  //controls the rect's x coordinate 
+    Message_rect.y = 0; // controls the rect's y coordinte
+    Message_rect.w = 100; // controls the width of the rect
+    Message_rect.h = 100; // controls the height of the rect
+
+    SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
+
+    // Don't forget to free your surface and texture
+    SDL_FreeSurface(surfaceMessage);
+    SDL_DestroyTexture(Message);
+
     return 1;
 }
 
