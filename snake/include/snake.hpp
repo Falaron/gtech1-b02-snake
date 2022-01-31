@@ -2,12 +2,11 @@ class Snake {
     public:
         int New();
         void Move(int X, int Y);
-        int CheckCollide(int winWidth, int winHeight);
+        int CheckCollide(int winWidth, int winHeight, int Size);
         void Eat();
 
-        int PositionX;
-        int PositionY;
-
+        int PosY;
+        int PosX;
 
     private:
         int Size;
