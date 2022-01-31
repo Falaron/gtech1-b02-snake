@@ -2,8 +2,8 @@
 #include <stdio.h>
 
 int Snake::New(){
-    PosX = 0;
-    PosY = 0;
+    PosX = 12;
+    PosY = 12;
     Size = 1;
 
     printf("New Snake : %d/%d\n", PosX, PosY);

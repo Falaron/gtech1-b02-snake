@@ -74,10 +74,9 @@ int Window::Draw(int SnakeX, int SnakeY, int FruitX, int FruitY){
     SDL_RenderFillRect(renderer, &fruit);
 
     //Draw Score
-    TTF_Font* Sans = TTF_OpenFont("ariali.ttf", 24);
+    /*TTF_Font* Sans = TTF_OpenFont("ariali.ttf", 24);
     SDL_Color White = {255, 255, 255};
-    SDL_Surface* surfaceMessage =
-        TTF_RenderText_Solid(Sans, "put your text here", White); 
+    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(Sans, "put your text here", White); 
     SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
 
     SDL_Rect Message_rect;
@@ -88,7 +87,7 @@ int Window::Draw(int SnakeX, int SnakeY, int FruitX, int FruitY){
 
     SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
     SDL_FreeSurface(surfaceMessage);
-    SDL_DestroyTexture(Message);
+    SDL_DestroyTexture(Message);*/
 
     return 1;
 }
