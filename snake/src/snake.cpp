@@ -1,21 +1,25 @@
 #include "../include/snake.hpp"
 #include <stdio.h>
 
-int Snake::New(int MaxLen){
-    PosX = 0;
-    PosY = 0;
+Snake::Snake(){
     Size = 1;
 
+    Segment *tail = new Segment(0,0);
+    Head = tail;
+    Last = tail;
+
     printf("New Snake : %d/%d\n", PosX, PosY);
-    
-    return 1;
-};
+}
 
 void Snake::Move(int DirectionX, int DirectionY){
-    printf("Move Snake : %d/%d\n", DirectionX, DirectionY);
-    PosX += DirectionX;
-    PosY += DirectionY;
+    Head->GridX += DirectionX;
+    Head->GridY += DirectionY;
 };
+
+int Snake::Draw(int WindowSize, SDL_Renderer ** renderer){
+    Head->Update(WindowSize, renderer);
+    return 1;
+}
 
 int Snake::CheckCollide(int winWidth, int winHeight){
     //posX posY if( < winWidth)
@@ -23,8 +27,8 @@ int Snake::CheckCollide(int winWidth, int winHeight){
 };
 
 void Snake::Eat(){
-
-    Size += 1;
-
+    Segment *body = new Segment(Head->GridX,Head->GridY);
+    Last->next = body;
+    Last = body;
     return;
 };

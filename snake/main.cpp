@@ -6,7 +6,6 @@ int main(void){
     Window main_window;
     Snake snake_obj;
     main_window.New("Snake", 500, 500);
-    snake_obj.New(main_window);
 
     while(main_window.closeRequest == 0){
 
@@ -26,11 +25,12 @@ int main(void){
 
         if ( main_window.frame_time < main_window.frame_rate )
 		{
-            snake.CheckCollide(main_window.winWidth, main_window.winHeight);
+            snake_obj.CheckCollide(main_window.winWidth, main_window.winHeight);
             main_window.CheckKeys();
             snake_obj.Move(main_window.DirectionX, main_window.DirectionY);
+            main_window.Draw();
             snake_obj.Eat();
-            main_window.Draw(snake_obj.PosX, snake_obj.PosY);
+            snake_obj.Draw(main_window.GetSize(), main_window.GetRenderer());
             main_window.Refresh();
 
             SDL_Delay(main_window.frame_rate - main_window.frame_time);

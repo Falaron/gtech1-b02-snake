@@ -3,9 +3,11 @@
 class Window {
     public:
         int New(const char *WindowName, int Width, int Height);
-        int Draw(int X, int Y);
+        int Draw();
         int Refresh();
         int Destroy();
+        int GetSize();
+        SDL_Renderer ** GetRenderer();
         void CheckKeys();
 
         int winWidth, winHeight;

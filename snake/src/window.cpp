@@ -7,6 +7,9 @@ int Window::New(const char *WindowName, int Width, int Height){
     DirectionY = 0;
     Size = 25;
 
+    winWidth = Width;
+    winHeight = Height;
+
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
         printf("Error while initializing SDL : %s", SDL_GetError());
         return EXIT_FAILURE;
@@ -43,8 +46,7 @@ int Window::Destroy(){
     return EXIT_FAILURE;
 }
 
-int Window::Draw(int SnakeX, int SnakeY){
-    printf("%d/%d\n", SnakeX, SnakeY);
+int Window::Draw(){
     SDL_SetRenderDrawColor(renderer,0,0,0,0);
     SDL_RenderClear(renderer);
 
@@ -59,10 +61,6 @@ int Window::Draw(int SnakeX, int SnakeY){
             SDL_RenderFillRect(renderer, &rect); 
         }
     }
-
-    SDL_SetRenderDrawColor(renderer,255,255,255,255);
-    SDL_Rect rect = {SnakeX*500/Size, SnakeY*500/Size, 500/Size, 500/Size};
-    SDL_RenderFillRect(renderer, &rect); 
 
     return 1;
 }
@@ -101,4 +99,12 @@ void Window::CheckKeys(){
         closeRequest = 1;
         return;
     }
+}
+
+int Window::GetSize(){
+    return this->Size;
+}
+
+SDL_Renderer ** Window::GetRenderer(){
+    return &renderer;
 }

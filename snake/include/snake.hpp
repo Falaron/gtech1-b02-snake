@@ -1,18 +1,21 @@
-#include <vector> 
+#include <SDL2/SDL.h>
+#include "segment.hpp"
 
 class Snake {
     public:
-        int New(int MaxLen);
+        Snake();
         void Move(int X, int Y);
         int CheckCollide(int winWidth, int winHeight);
         void Eat();
+        int Draw(int WindowSize, SDL_Renderer ** Renderer);
 
         int PosY;
         int PosX;
+        int tail;
 
-        vector<int> previousPos;
-        
     private:
-        int Size;
         int Direction;
+        int Size;
+        Segment* Head;
+        Segment* Last;
 };
