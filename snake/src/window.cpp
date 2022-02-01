@@ -1,7 +1,8 @@
 #include "../include/window.hpp"
 
 int Window::New(const char *WindowName, int Width, int Height){
-    frame_rate = 120;
+    frame_rate = 10;
+    frameSlower = 0;
     closeRequest = 0;
     DirectionX = 0;
     DirectionY = 0;
@@ -24,6 +25,7 @@ int Window::New(const char *WindowName, int Width, int Height){
 
     //check windows size
     SDL_GetWindowSize(window, &winWidth, &winHeight);
+    
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
@@ -46,10 +48,12 @@ int Window::Destroy(){
     return EXIT_FAILURE;
 }
 
-int Window::Draw(){
+int Window::Draw(int FruitX, int FruitY){
+    //Init Room
     SDL_SetRenderDrawColor(renderer,0,0,0,0);
     SDL_RenderClear(renderer);
 
+    //Draw Room
     for(int row=0; row<Size; row++){
         for(int column=0; column<Size; column++){
             if(row == column || row%2 == 0 && column%2 == 0 || column%2 == 1 && row%2 == 1){
@@ -58,9 +62,30 @@ int Window::Draw(){
                 SDL_SetRenderDrawColor(renderer,65,232,121,91);
             }
             SDL_Rect rect = {row*500/Size, column*500/Size, 500/Size, 500/Size};
-            SDL_RenderFillRect(renderer, &rect); 
+            SDL_RenderFillRect(renderer, &rect);
         }
     }
+
+    //Draw Fruit
+    SDL_SetRenderDrawColor(renderer,255,0,0,255);
+    SDL_Rect fruit = {FruitX*500/Size, FruitY*500/Size, 500/Size, 500/Size};
+    SDL_RenderFillRect(renderer, &fruit);
+
+    //Draw Score
+    /*TTF_Font* Sans = TTF_OpenFont("ariali.ttf", 24);
+    SDL_Color White = {255, 255, 255};
+    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(Sans, "put your text here", White); 
+    SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+
+    SDL_Rect Message_rect;
+    Message_rect.x = 0;  
+    Message_rect.y = 0; 
+    Message_rect.w = 100;
+    Message_rect.h = 100; 
+
+    SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
+    SDL_FreeSurface(surfaceMessage);
+    SDL_DestroyTexture(Message);*/
 
     return 1;
 }
@@ -75,22 +100,18 @@ void Window::CheckKeys(){
     
 
     if (keystates[SDL_SCANCODE_UP]) {
-        printf("Up\n");
         DirectionX = 0;
         DirectionY = -1;
     }
     if (keystates[SDL_SCANCODE_DOWN]) {
-        printf("Down\n");
         DirectionX = 0;
         DirectionY = 1;
     }
     if (keystates[SDL_SCANCODE_LEFT]) {
-        printf("Left\n");
         DirectionX = -1;
         DirectionY = 0;
     }
     if (keystates[SDL_SCANCODE_RIGHT]) {
-        printf("Right\n");
         DirectionX = 1;
         DirectionY = 0;
     }

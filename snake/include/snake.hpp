@@ -5,7 +5,7 @@ class Snake {
     public:
         Snake();
         void Move(int X, int Y);
-        int CheckCollide(int winWidth, int winHeight);
+        int CheckCollide(int winWidth, int winHeight, int Size);
         void Eat();
         int Draw(int WindowSize, SDL_Renderer ** Renderer);
 

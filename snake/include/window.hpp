@@ -1,9 +1,12 @@
 #include <SDL2/SDL.h>
+#include <string>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 class Window {
     public:
         int New(const char *WindowName, int Width, int Height);
-        int Draw();
+        int Draw(int fruitX, int fruitY);
         int Refresh();
         int Destroy();
         int GetSize();
@@ -19,6 +22,8 @@ class Window {
         int closeRequest;
         Uint32 frame_time_start, frame_time;
         Uint32 frame_rate;
+
+        int frameSlower;
 
     private:
         SDL_Window *window;
