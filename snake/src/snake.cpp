@@ -55,6 +55,7 @@ void Snake::CheckSnakeCollide(){
 
 void Snake::Eat(){
     Size += 1;
+    printf("Creating a segment on Position : %d/%d\n", PosX, PosY);
     Segment *body = new Segment(PosX, PosY);
     Last->next = body;
     Last = body;
