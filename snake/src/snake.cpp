@@ -30,7 +30,7 @@ int Snake::CheckCollide(int winWidth, int winHeight, int Size){
     winWidth = winWidth/Size+4;
     winHeight = winHeight/Size+4;
     if(PosX > winWidth || PosX < 0 || PosY > winHeight || PosY < 0){
-        printf("STOP");
+        printf("STOP\n");
     }
     return 1;
 };
