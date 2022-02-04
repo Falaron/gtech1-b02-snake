@@ -76,11 +76,25 @@ int Window::Draw(int FruitX, int FruitY){
     SDL_RenderFillRect(renderer, &fruit);
 
     //Draw Score
-    font = TTF_OpenFont("arial.ttf", 25);
+    /*font = TTF_OpenFont("arial.ttf", 25);
 
+    SDL_Color White = {255, 255, 255};
 
-    	
-    TTF_CloseFont(font);
+    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, "put your text here", White); 
+
+    // now you can convert it into a texture
+    SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+
+    SDL_Rect Message_rect; //create a rect
+    Message_rect.x = 0;  //controls the rect's x coordinate 
+    Message_rect.y = 0; // controls the rect's y coordinte
+    Message_rect.w = 100; // controls the width of the rect
+    Message_rect.h = 100; // controls the height of the rect
+
+    SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
+
+    SDL_FreeSurface(surfaceMessage);
+    SDL_DestroyTexture(Message);*/
 
     return 1;
 }
