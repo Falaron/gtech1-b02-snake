@@ -84,23 +84,27 @@ int Window::Refresh(){
     return 1;
 }
 
-void Window::CheckKeys(){
+void Window::CheckKeys(int SnakeSize){
     const Uint8 *keystates = SDL_GetKeyboardState(NULL);
     
 
     if (keystates[SDL_SCANCODE_UP]) {
+        if(SnakeSize > 1 && DirectionY == 1 && DirectionX == 0) return;
         DirectionX = 0;
         DirectionY = -1;
     }
     if (keystates[SDL_SCANCODE_DOWN]) {
+        if(SnakeSize > 1 && DirectionY == -1 && DirectionX == 0) return;
         DirectionX = 0;
         DirectionY = 1;
     }
     if (keystates[SDL_SCANCODE_LEFT]) {
+        if(SnakeSize > 1 && DirectionY == 0 && DirectionX == 1) return;
         DirectionX = -1;
         DirectionY = 0;
     }
     if (keystates[SDL_SCANCODE_RIGHT]) {
+        if(SnakeSize > 1 && DirectionY == 0 && DirectionX == -1) return;
         DirectionX = 1;
         DirectionY = 0;
     }

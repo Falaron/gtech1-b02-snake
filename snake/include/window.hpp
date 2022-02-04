@@ -11,7 +11,7 @@ class Window {
         int Destroy();
         int GetSize();
         SDL_Renderer ** GetRenderer();
-        void CheckKeys();
+        void CheckKeys(int SnakeSize);
 
         int winWidth, winHeight;
 

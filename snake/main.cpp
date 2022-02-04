@@ -28,7 +28,7 @@ int main(void){
         if ( main_window.frame_time < main_window.frame_rate )
 		{
 
-            main_window.CheckKeys();
+            main_window.CheckKeys(snake_obj.GetSnakeSize());
             if(main_window.frameSlower >= 12){
                 if(fruit_obj.PosX == snake_obj.PosX && fruit_obj.PosY == snake_obj.PosY){
                     fruit_obj.Randomizer();
@@ -39,6 +39,7 @@ int main(void){
                 main_window.Draw(fruit_obj.PosX, fruit_obj.PosY);
                 snake_obj.Draw(main_window.GetSize(), main_window.GetRenderer());
                 main_window.Refresh();
+                snake_obj.CheckSnakeCollide();
 
                 main_window.frameSlower = 0;
             }
