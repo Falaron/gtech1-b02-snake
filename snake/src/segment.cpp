@@ -7,6 +7,8 @@ Segment::Segment(int X, int Y){
     OldX = X;
     OldY = Y;
 
+    next = NULL;
+
     printf("Succesfuly created a segment ! (%d/%d)\n", GridX, GridY);
 
     return;
