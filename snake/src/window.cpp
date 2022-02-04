@@ -16,7 +16,8 @@ int Window::New(const char *WindowName, int Width, int Height){
         return EXIT_FAILURE;
     }
 
-    
+    	
+    TTF_Init();
 
     // Création fenêtre.
     window = SDL_CreateWindow(WindowName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Width, Height, SDL_WINDOW_SHOWN);
@@ -44,8 +45,8 @@ int Window::New(const char *WindowName, int Width, int Height){
 
 int Window::Destroy(){
     SDL_DestroyWindow(window);
-    SDL_DestroyRenderer(renderer);
-    
+    SDL_DestroyRenderer(renderer);	
+    TTF_Quit();
     SDL_Quit();
 
     return EXIT_FAILURE;
@@ -75,6 +76,11 @@ int Window::Draw(int FruitX, int FruitY){
     SDL_RenderFillRect(renderer, &fruit);
 
     //Draw Score
+    font = TTF_OpenFont("arial.ttf", 25);
+
+
+    	
+    TTF_CloseFont(font);
 
     return 1;
 }

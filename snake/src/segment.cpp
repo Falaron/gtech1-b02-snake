@@ -17,7 +17,7 @@ void Segment::Update(int Pos, int WindowSize, SDL_Renderer ** renderer){
     int G = 199*Pos/38;
     int B = 250;
     int X = 98;
-    printf("%d/%d/%d/%d", R, G, B, X);
+    //printf("%d/%d/%d/%d", R, G, B, X);
 
 
     SDL_SetRenderDrawColor(*renderer,R,G,B,X);
