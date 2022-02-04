@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <iostream>
 #include "segment.hpp"
 
 class Snake {
@@ -8,6 +9,8 @@ class Snake {
         int CheckCollide(int winWidth, int winHeight, int Size);
         void Eat();
         int Draw(int WindowSize, SDL_Renderer ** Renderer);
+        void CheckSnakeCollide();
+        int GetSnakeSize();
 
         int PosY;
         int PosX;

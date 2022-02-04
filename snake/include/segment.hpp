@@ -6,7 +6,7 @@ class Segment{
         Segment *last;
 
         Segment(int X, int Y);
-        void Update(int WindowSize, SDL_Renderer ** renderer);
+        void Update(int Pos, int WindowSize, SDL_Renderer ** renderer);
 
         int GridX;
         int GridY;
