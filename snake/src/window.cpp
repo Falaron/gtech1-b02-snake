@@ -80,10 +80,10 @@ int Window::Draw(int FruitX, int FruitY){
 
     SDL_Color White = {255, 255, 255};
 
-    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, "put your text here", White); 
+    surfaceMessage = TTF_RenderText_Solid(font, "put your text here", White); 
 
     // now you can convert it into a texture
-    SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+    Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
 
     SDL_Rect Message_rect; //create a rect
     Message_rect.x = 0;  //controls the rect's x coordinate 
