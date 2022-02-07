@@ -52,7 +52,7 @@ int Window::Destroy(){
     return EXIT_FAILURE;
 }
 
-int Window::Draw(int FruitX, int FruitY){
+int Window::Draw(int FruitX, int FruitY, int snakeSize){
     //Init Room
     SDL_SetRenderDrawColor(renderer,0,0,0,0);
     SDL_RenderClear(renderer);
@@ -87,10 +87,15 @@ int Window::Draw(int FruitX, int FruitY){
     //Draw Score
     TTF_Font * font = TTF_OpenFont("arial.ttf", 24);
     SDL_Color color = { 255, 255, 255 };
-    SDL_Surface * surface = TTF_RenderText_Solid(font,
-    "Welcome to Gigi Labs", color);
+    
+    std::string scoreText = "Score : "+ std::to_string(snakeSize);
+    SDL_Surface * surface = TTF_RenderText_Solid(font, scoreText.c_str(), color);
     SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_RenderCopy(renderer, texture, NULL, NULL);
+    int texW = 0;
+    int texH = 0;
+    SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+    SDL_Rect dstrect = { 0, 0, texW, texH };
+    SDL_RenderCopy(renderer, texture, NULL, &dstrect);
     	
 
     return 1;

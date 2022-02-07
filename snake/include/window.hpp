@@ -6,7 +6,7 @@
 class Window {
     public:
         int New(const char *WindowName, int Width, int Height);
-        int Draw(int fruitX, int fruitY);
+        int Draw(int fruitX, int fruitY, int snakeSize);
         int Refresh();
         int Destroy();
         int GetSize();
