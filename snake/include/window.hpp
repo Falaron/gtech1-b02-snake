@@ -6,7 +6,8 @@
 class Window {
     public:
         int New(const char *WindowName, int Width, int Height);
-        int Draw(int fruitX, int fruitY, int snakeSize);
+        int Draw(int fruitX, int fruitY);
+        int DrawScore(int scoreX, int scoreY, int snakeSize);
         int Refresh();
         int Destroy();
         int GetSize();
@@ -25,7 +26,11 @@ class Window {
 
         int frameSlower;
         SDL_Surface * surface;
+        SDL_Texture * texture;
         TTF_Font * font;
+        std::string scoreText;
+        int scoreX;
+        int scoreY;
 
     private:
         SDL_Window *window;

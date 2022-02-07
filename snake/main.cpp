@@ -7,7 +7,7 @@ int main(void){
     Window main_window;
     Snake snake_obj;
     Fruit fruit_obj;
-    main_window.New("Snake", 500, 500);
+    main_window.New("Snake", 500, 600);
 
     while(main_window.closeRequest == 0){
         int Size = main_window.GetSize();
@@ -36,8 +36,9 @@ int main(void){
                 }
                 int Collide = snake_obj.CheckCollide(main_window.winWidth, main_window.winHeight, Size);
                 snake_obj.Move(main_window.DirectionX, main_window.DirectionY);
-                main_window.Draw(fruit_obj.PosX, fruit_obj.PosY, snake_obj.GetSnakeSize());
+                main_window.Draw(fruit_obj.PosX, fruit_obj.PosY);
                 snake_obj.Draw(main_window.GetSize(), main_window.GetRenderer());
+                main_window.DrawScore(main_window.scoreX,main_window.scoreY,snake_obj.GetSnakeSize());
                 main_window.Refresh();
                 if (Collide == 0){
                     Collide = snake_obj.CheckSnakeCollide();
@@ -49,8 +50,9 @@ int main(void){
                     main_window.DirectionY = 0;
                     printf("Deleted segments\n");
 
-                    main_window.Draw(fruit_obj.PosX, fruit_obj.PosY, snake_obj.GetSnakeSize());
+                    main_window.Draw(fruit_obj.PosX, fruit_obj.PosY);
                     snake_obj.Draw(main_window.GetSize(), main_window.GetRenderer());
+                    main_window.DrawScore(main_window.scoreX,main_window.scoreY,snake_obj.GetSnakeSize());
                     main_window.Refresh();
                     SDL_Delay(1000);
                 }

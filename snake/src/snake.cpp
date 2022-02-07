@@ -4,7 +4,7 @@
 Snake::Snake(){
     Size = 1;
 
-    Segment *tail = new Segment(0,0);
+    Segment *tail = new Segment(12,12);
     Head = tail;
     Last = tail;
 
@@ -28,7 +28,7 @@ int Snake::Draw(int WindowSize, SDL_Renderer ** renderer){
 
 int Snake::CheckCollide(int winWidth, int winHeight, int Size){
     winWidth = winWidth/Size+4;
-    winHeight = winHeight/Size+4;
+    winHeight = (winHeight-100)/Size+4;
     if(PosX > winWidth || PosX < 0 || PosY > winHeight || PosY < 0){
         return 1;
     }
@@ -79,12 +79,12 @@ void Snake::DeleteSegments(){
     Head->next = NULL;
     Last = Head;
     Size = 1;
-    PosX = 0;
-    PosY = 0;
-    Head->GridX = 0;
-    Head->GridY = 0;
-    Head->OldX = 0;
-    Head->OldY = 0;
+    PosX = 12;
+    PosY = 12;
+    Head->GridX = 12;
+    Head->GridY = 12;
+    Head->OldX = 12;
+    Head->OldY = 12;
 }
 
 int Snake::GetSnakeSize(){
