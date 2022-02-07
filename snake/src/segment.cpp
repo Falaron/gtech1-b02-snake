@@ -9,8 +9,6 @@ Segment::Segment(int X, int Y){
 
     next = NULL;
 
-    printf("Succesfuly created a segment ! (%d/%d)\n", GridX, GridY);
-
     return;
 }
 
@@ -25,8 +23,6 @@ void Segment::Update(int Pos, int WindowSize, SDL_Renderer ** renderer){
     SDL_SetRenderDrawColor(*renderer,R,G,B,X);
     SDL_Rect rect = {this->GridX*500/WindowSize, this->GridY*500/WindowSize, 500/WindowSize, 500/WindowSize};
     SDL_RenderFillRect(*renderer, &rect);
-
-    printf("Segment %d : %d/%d\n", Pos, GridX, GridY);
 
     if (next){
         next->GridX = this->OldX;

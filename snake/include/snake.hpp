@@ -9,8 +9,9 @@ class Snake {
         int CheckCollide(int winWidth, int winHeight, int Size);
         void Eat();
         int Draw(int WindowSize, SDL_Renderer ** Renderer);
-        void CheckSnakeCollide();
+        int CheckSnakeCollide();
         int GetSnakeSize();
+        void DeleteSegments();
 
         int PosY;
         int PosX;
