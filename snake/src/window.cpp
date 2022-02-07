@@ -75,26 +75,23 @@ int Window::Draw(int FruitX, int FruitY){
     SDL_Rect fruit = {FruitX*500/Size, FruitY*500/Size, 500/Size, 500/Size};
     SDL_RenderFillRect(renderer, &fruit);
 
+    /*SDL_Surface* image = SDL_LoadBMP("game_over.bmp");
+    if(!image)
+    {
+        printf("Erreur de chargement de l'image : %s",SDL_GetError());
+        return EXIT_FAILURE;
+    }
+    SDL_Texture* monImage = SDL_CreateTextureFromSurface(renderer,image);
+    SDL_FreeSurface(image);*/
+
     //Draw Score
-    /*font = TTF_OpenFont("arial.ttf", 25);
-
-    SDL_Color White = {255, 255, 255};
-
-    surfaceMessage = TTF_RenderText_Solid(font, "put your text here", White); 
-
-    // now you can convert it into a texture
-    Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
-
-    SDL_Rect Message_rect; //create a rect
-    Message_rect.x = 0;  //controls the rect's x coordinate 
-    Message_rect.y = 0; // controls the rect's y coordinte
-    Message_rect.w = 100; // controls the width of the rect
-    Message_rect.h = 100; // controls the height of the rect
-
-    SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
-
-    SDL_FreeSurface(surfaceMessage);
-    SDL_DestroyTexture(Message);*/
+    TTF_Font * font = TTF_OpenFont("arial.ttf", 24);
+    SDL_Color color = { 255, 255, 255 };
+    SDL_Surface * surface = TTF_RenderText_Solid(font,
+    "Welcome to Gigi Labs", color);
+    SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_RenderCopy(renderer, texture, NULL, NULL);
+    	
 
     return 1;
 }

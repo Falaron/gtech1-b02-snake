@@ -24,9 +24,9 @@ class Window {
         Uint32 frame_rate;
 
         int frameSlower;
-        /*TTF_Font * font;
-        SDL_Surface* surfaceMessage;
-        SDL_Texture* Message;*/
+        SDL_Surface * surface;
+        TTF_Font * font;
+        //SDL_Surface* image;
 
     private:
         SDL_Window *window;
