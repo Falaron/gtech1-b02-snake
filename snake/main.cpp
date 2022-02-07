@@ -34,12 +34,26 @@ int main(void){
                     fruit_obj.Randomizer();
                     snake_obj.Eat();
                 }
-                snake_obj.CheckCollide(main_window.winWidth, main_window.winHeight, Size);
+                int Collide = snake_obj.CheckCollide(main_window.winWidth, main_window.winHeight, Size);
                 snake_obj.Move(main_window.DirectionX, main_window.DirectionY);
                 main_window.Draw(fruit_obj.PosX, fruit_obj.PosY);
                 snake_obj.Draw(main_window.GetSize(), main_window.GetRenderer());
                 main_window.Refresh();
-                snake_obj.CheckSnakeCollide();
+                if (Collide == 0){
+                    Collide = snake_obj.CheckSnakeCollide();
+                }
+                
+                if(Collide==1){
+                    snake_obj.DeleteSegments();
+                    main_window.DirectionX = 0;
+                    main_window.DirectionY = 0;
+                    printf("Deleted segments\n");
+
+                    main_window.Draw(fruit_obj.PosX, fruit_obj.PosY);
+                    snake_obj.Draw(main_window.GetSize(), main_window.GetRenderer());
+                    main_window.Refresh();
+                    SDL_Delay(1000);
+                }
 
                 main_window.frameSlower = 0;
             }
