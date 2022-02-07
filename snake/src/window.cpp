@@ -16,6 +16,9 @@ int Window::New(const char *WindowName, int Width, int Height){
         return EXIT_FAILURE;
     }
 
+    	
+    TTF_Init();
+
     // Création fenêtre.
     window = SDL_CreateWindow(WindowName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Width, Height, SDL_WINDOW_SHOWN);
     if(window == NULL) {
@@ -42,13 +45,14 @@ int Window::New(const char *WindowName, int Width, int Height){
 
 int Window::Destroy(){
     SDL_DestroyWindow(window);
-    SDL_DestroyRenderer(renderer); 
+    SDL_DestroyRenderer(renderer);	
+    TTF_Quit();
     SDL_Quit();
 
     return EXIT_FAILURE;
 }
 
-int Window::Draw(int FruitX, int FruitY){
+int Window::Draw(int FruitX, int FruitY, int snakeSize){
     //Init Room
     SDL_SetRenderDrawColor(renderer,0,0,0,0);
     SDL_RenderClear(renderer);
@@ -70,22 +74,18 @@ int Window::Draw(int FruitX, int FruitY){
     SDL_SetRenderDrawColor(renderer,255,0,0,255);
     SDL_Rect fruit = {FruitX*500/Size, FruitY*500/Size, 500/Size, 500/Size};
     SDL_RenderFillRect(renderer, &fruit);
-
-    //Draw Score
-    /*TTF_Font* Sans = TTF_OpenFont("ariali.ttf", 24);
-    SDL_Color White = {255, 255, 255};
-    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(Sans, "put your text here", White); 
-    SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
-
-    SDL_Rect Message_rect;
-    Message_rect.x = 0;  
-    Message_rect.y = 0; 
-    Message_rect.w = 100;
-    Message_rect.h = 100; 
-
-    SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
-    SDL_FreeSurface(surfaceMessage);
-    SDL_DestroyTexture(Message);*/
+    TTF_Font * font = TTF_OpenFont("arialbd.ttf", 25);
+    SDL_Color color = { 0, 0, 0 };
+    
+    std::string scoreText = "Score : "+ std::to_string(snakeSize);
+    SDL_Surface * surface = TTF_RenderText_Solid(font, scoreText.c_str(), color);
+    SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, surface);
+    int texW = 0;
+    int texH = 0;
+    SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+    SDL_Rect dstrect = { 0, 0, texW, texH };
+    SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+    	
 
     return 1;
 }

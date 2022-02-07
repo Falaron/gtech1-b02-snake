@@ -1,12 +1,12 @@
 #include <SDL2/SDL.h>
-#include <string>
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+//#include <SDL2/SDL_image.h>
+#include <string>
 
 class Window {
     public:
         int New(const char *WindowName, int Width, int Height);
-        int Draw(int fruitX, int fruitY);
+        int Draw(int fruitX, int fruitY, int snakeSize);
         int Refresh();
         int Destroy();
         int GetSize();
@@ -24,6 +24,8 @@ class Window {
         Uint32 frame_rate;
 
         int frameSlower;
+        SDL_Surface * surface;
+        TTF_Font * font;
 
     private:
         SDL_Window *window;
