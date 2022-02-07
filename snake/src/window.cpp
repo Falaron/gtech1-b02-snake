@@ -74,19 +74,8 @@ int Window::Draw(int FruitX, int FruitY, int snakeSize){
     SDL_SetRenderDrawColor(renderer,255,0,0,255);
     SDL_Rect fruit = {FruitX*500/Size, FruitY*500/Size, 500/Size, 500/Size};
     SDL_RenderFillRect(renderer, &fruit);
-
-    /*SDL_Surface* image = SDL_LoadBMP("game_over.bmp");
-    if(!image)
-    {
-        printf("Erreur de chargement de l'image : %s",SDL_GetError());
-        return EXIT_FAILURE;
-    }
-    SDL_Texture* monImage = SDL_CreateTextureFromSurface(renderer,image);
-    SDL_FreeSurface(image);*/
-
-    //Draw Score
-    TTF_Font * font = TTF_OpenFont("arial.ttf", 24);
-    SDL_Color color = { 255, 255, 255 };
+    TTF_Font * font = TTF_OpenFont("arialbd.ttf", 25);
+    SDL_Color color = { 0, 0, 0 };
     
     std::string scoreText = "Score : "+ std::to_string(snakeSize);
     SDL_Surface * surface = TTF_RenderText_Solid(font, scoreText.c_str(), color);

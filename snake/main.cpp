@@ -49,7 +49,7 @@ int main(void){
                     main_window.DirectionY = 0;
                     printf("Deleted segments\n");
 
-                    main_window.Draw(fruit_obj.PosX, fruit_obj.PosY);
+                    main_window.Draw(fruit_obj.PosX, fruit_obj.PosY, snake_obj.GetSnakeSize());
                     snake_obj.Draw(main_window.GetSize(), main_window.GetRenderer());
                     main_window.Refresh();
                     SDL_Delay(1000);

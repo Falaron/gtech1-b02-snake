@@ -26,7 +26,6 @@ class Window {
         int frameSlower;
         SDL_Surface * surface;
         TTF_Font * font;
-        //SDL_Surface* image;
 
     private:
         SDL_Window *window;
