@@ -1,6 +1,7 @@
 #include "../include/window.hpp"
 
-int Window::New(const char *WindowName, int Width, int Height){
+
+Window::Window(const char *WindowName, int Width, int Height){
     frame_rate = 10;
     frameSlower = 0;
     closeRequest = 0;
@@ -9,23 +10,28 @@ int Window::New(const char *WindowName, int Width, int Height){
     Size = 25;
     scoreX = 400;
     scoreY = 90;
+    
 
     winWidth = Width;
     winHeight = Height-100;
 
+    
+
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
         printf("Error while initializing SDL : %s", SDL_GetError());
-        return EXIT_FAILURE;
+        return;
     }
+    TTF_Init();
+    font = TTF_OpenFont("arial.ttf", 25);
+    color = { 255, 255, 255 };
 
     	
-    TTF_Init();
 
     // Création fenêtre.
     window = SDL_CreateWindow(WindowName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Width, Height, SDL_WINDOW_SHOWN);
     if(window == NULL) {
         printf("Couldn't create window : %s", SDL_GetError());
-        return 1;
+        return;
     }
 
     //check windows size
@@ -37,12 +43,12 @@ int Window::New(const char *WindowName, int Width, int Height){
     if(renderer == NULL)
     {
         printf("Erreur lors de la creation d'un renderer : %s",SDL_GetError());
-        return EXIT_FAILURE;
+        return;
     }
 
     SDL_RenderClear(renderer);
 
-    return 1;
+    return;
 }
 
 int Window::Destroy(){
@@ -81,15 +87,21 @@ int Window::Draw(int FruitX, int FruitY){
 }
 
 int Window::DrawScore(int scoreX, int scoreY, int snakeSize) {
-
-    TTF_Font * font = TTF_OpenFont("arial.ttf", 25);
-    SDL_Color color = { 255, 255, 255 };
+    printf("COLOR INIT\n");
     std::string scoreText = "Score : "+ std::to_string(snakeSize);
-    SDL_Surface * surface = TTF_RenderText_Solid(font, scoreText.c_str(), color);
-    SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, surface);
+    printf("STR SCORE TEXT\n");
+    printf("ScoreText: %s\n",scoreText.c_str());
+    printf("zef\n");
+    surface = TTF_RenderText_Solid(font, scoreText.c_str(), color);
+    printf("DEFINE SURFACE\n");
+    texture = SDL_CreateTextureFromSurface(renderer, surface);
+    printf("DEFINE TEXTURE\n");
     SDL_QueryTexture(texture, NULL, NULL, 0, 0);
+    printf("QUERY TEXTURE\n");
     SDL_Rect scoreRect = { 50, 505, scoreX, scoreY };
+    printf("DEFINE SCORE RECT\n");
     SDL_RenderCopy(renderer, texture, NULL, &scoreRect);
+    printf("RENDER COPY\n");
 
     return  1;
 }
@@ -128,6 +140,7 @@ void Window::CheckKeys(int SnakeSize){
         closeRequest = 1;
         return;
     }
+
 }
 
 int Window::GetSize(){

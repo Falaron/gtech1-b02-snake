@@ -23,13 +23,15 @@ int ran(){
 
     std::mt19937 gen(seed);
     std::uniform_int_distribution<unsigned> distrib(0, 24);
-
-    return distrib(gen);
+    int result = distrib(gen);
+    //printf("distrib(gen) : %d\n",result);
+    return result;
 }
 
 int Fruit::Randomizer(){
     PosX = ran();
     PosY = ran();
+    //printf("PosXX : %d\nPosYY : %d\n",PosX,PosY);
 
     return 1;
 }
