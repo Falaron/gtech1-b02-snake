@@ -93,7 +93,7 @@ int ** Snake::GetSnakePosition(){
         result[i] = new int[1];
 
     result[0][0] = Head->GridX;
-    result[0][1] = Head->GridX;
+    result[0][1] = Head->GridY;
     if (!Head->next){
         return result;
     };
@@ -102,7 +102,7 @@ int ** Snake::GetSnakePosition(){
 
     for (int i = 0; i < Size-1; i++){
         result[i+1][0] = Current->GridX;
-        result[i+1][1] = Current->GridX;
+        result[i+1][1] = Current->GridY;
         printf("HERE\n");
         if (Current->next){
             Current = Current->next;
