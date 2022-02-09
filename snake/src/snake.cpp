@@ -103,7 +103,6 @@ int ** Snake::GetSnakePosition(){
     for (int i = 0; i < Size-1; i++){
         result[i+1][0] = Current->GridX;
         result[i+1][1] = Current->GridY;
-        printf("HERE\n");
         if (Current->next){
             Current = Current->next;
         }
