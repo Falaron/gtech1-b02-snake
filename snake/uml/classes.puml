@@ -1,0 +1,106 @@
+@startuml
+
+
+
+
+
+/' Objects '/
+
+class Fruit {
+	+Fruit()
+	+PosX : int
+	+PosY : int
+	+Randomizer() : int
+}
+
+
+class Segment {
+	+Segment(int X, int Y)
+	+last : Segment*
+	+next : Segment*
+	+GridX : int
+	+GridY : int
+	+OldX : int
+	+OldY : int
+	+Update(int Pos, int WindowSize, SDL_Renderer** renderer) : void
+}
+
+
+class Snake {
+	+Snake()
+	-Head : Segment*
+	-Last : Segment*
+	+CheckCollide(int winWidth, int winHeight, int Size) : int
+	+CheckSnakeCollide() : int
+	-Direction : int
+	+Draw(int WindowSize, SDL_Renderer** Renderer) : int
+	+GetSnakeSize() : int
+	+PosX : int
+	+PosY : int
+	-Size : int
+	+tail : int
+	+GetSnakePosition() : int*
+	+DeleteSegments() : void
+	+Eat() : void
+	+Move(int X, int Y) : void
+}
+
+
+class Window {
+	+Window(const char* WindowName, int Width, int Height)
+	+color : SDL_Color
+	+event : SDL_Event
+	+GetRenderer() : SDL_Renderer*
+	-renderer : SDL_Renderer*
+	+surface : SDL_Surface*
+	+texture : SDL_Texture*
+	-window : SDL_Window*
+	+font : TTF_Font*
+	+frame_rate : Uint32
+	+frame_time : Uint32
+	+frame_time_start : Uint32
+	+Destroy() : int
+	+DirectionX : int
+	+DirectionY : int
+	+Draw(int fruitX, int fruitY) : int
+	+DrawScore(int scoreX, int scoreY, int snakeSize) : int
+	+GetSize() : int
+	+Refresh() : int
+	-Size : int
+	+closeRequest : int
+	-doOnce : int
+	+frameSlower : int
+	+scoreX : int
+	+scoreY : int
+	+winHeight : int
+	+winWidth : int
+	+CheckKeys(int SnakeSize) : void
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+
+
+
+/' Aggregation relationships '/
+
+.Segment "2" o-- .Segment
+
+
+.Snake "2" o-- .Segment
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml
+

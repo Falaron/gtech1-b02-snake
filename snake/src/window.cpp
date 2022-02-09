@@ -87,21 +87,12 @@ int Window::Draw(int FruitX, int FruitY){
 }
 
 int Window::DrawScore(int scoreX, int scoreY, int snakeSize) {
-    printf("COLOR INIT\n");
     std::string scoreText = "Score : "+ std::to_string(snakeSize);
-    printf("STR SCORE TEXT\n");
-    printf("ScoreText: %s\n",scoreText.c_str());
-    printf("zef\n");
     surface = TTF_RenderText_Solid(font, scoreText.c_str(), color);
-    printf("DEFINE SURFACE\n");
     texture = SDL_CreateTextureFromSurface(renderer, surface);
-    printf("DEFINE TEXTURE\n");
     SDL_QueryTexture(texture, NULL, NULL, 0, 0);
-    printf("QUERY TEXTURE\n");
     SDL_Rect scoreRect = { 50, 505, scoreX, scoreY };
-    printf("DEFINE SCORE RECT\n");
     SDL_RenderCopy(renderer, texture, NULL, &scoreRect);
-    printf("RENDER COPY\n");
 
     return  1;
 }
