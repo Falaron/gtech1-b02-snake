@@ -54,7 +54,7 @@ Window::Window(const char *WindowName, int Width, int Height){
 int Window::Destroy(){
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);	
-    TTF_Quit();
+    //TTF_Quit();
     SDL_Quit();
 
     return EXIT_FAILURE;
