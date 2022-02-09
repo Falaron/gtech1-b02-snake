@@ -12,6 +12,8 @@ class Snake {
         int CheckSnakeCollide();
         int GetSnakeSize();
         void DeleteSegments();
+        int ** GetSnakePosition();
+
 
         int PosY;
         int PosX;

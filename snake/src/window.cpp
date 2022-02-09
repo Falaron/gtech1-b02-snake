@@ -17,7 +17,7 @@ int Window::New(const char *WindowName, int Width, int Height){
     }
 
     	
-    TTF_Init();
+    //TTF_Init();
 
     // Création fenêtre.
     window = SDL_CreateWindow(WindowName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Width, Height, SDL_WINDOW_SHOWN);
@@ -46,7 +46,7 @@ int Window::New(const char *WindowName, int Width, int Height){
 int Window::Destroy(){
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);	
-    TTF_Quit();
+    //TTF_Quit();
     SDL_Quit();
 
     return EXIT_FAILURE;
@@ -74,17 +74,17 @@ int Window::Draw(int FruitX, int FruitY, int snakeSize){
     SDL_SetRenderDrawColor(renderer,255,0,0,255);
     SDL_Rect fruit = {FruitX*500/Size, FruitY*500/Size, 500/Size, 500/Size};
     SDL_RenderFillRect(renderer, &fruit);
-    TTF_Font * font = TTF_OpenFont("arialbd.ttf", 25);
-    SDL_Color color = { 0, 0, 0 };
+    //TTF_Font * font = TTF_OpenFont("arialbd.ttf", 25);
+    //SDL_Color color = { 0, 0, 0 };
     
-    std::string scoreText = "Score : "+ std::to_string(snakeSize);
+    /*std::string scoreText = "Score : "+ std::to_string(snakeSize);
     SDL_Surface * surface = TTF_RenderText_Solid(font, scoreText.c_str(), color);
     SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, surface);
     int texW = 0;
     int texH = 0;
     SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
     SDL_Rect dstrect = { 0, 0, texW, texH };
-    SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+    SDL_RenderCopy(renderer, texture, NULL, &dstrect);*/
     	
 
     return 1;

@@ -42,6 +42,13 @@ int main(void){
                 if (Collide == 0){
                     Collide = snake_obj.CheckSnakeCollide();
                 }
+
+                int ** Pos = snake_obj.GetSnakePosition();
+                for (int i=0; i < snake_obj.GetSnakeSize(); i++){
+                    printf("Position %d\n", i);
+                    printf("X : %d\n", Pos[i][0]);
+                    printf("Y : %d\n", Pos[i][1]);
+                }
                 
                 if(Collide==1){
                     snake_obj.DeleteSegments();

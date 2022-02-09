@@ -87,6 +87,30 @@ void Snake::DeleteSegments(){
     Head->OldY = 0;
 }
 
+int ** Snake::GetSnakePosition(){
+    int** result = new int*[Size];
+    for(int i = 0; i < Size; ++i)
+        result[i] = new int[1];
+
+    if (!Head->next){
+        result[0][0] = Head->GridX;
+        result[0][1] = Head->GridX;
+        return result;
+    };
+
+    Segment* Current = Head->next;
+
+    for (int i = 0; i < Size-1; i++){
+        result[i+1][0] = Current->GridX;
+        result[i+1][1] = Current->GridX;
+        printf("HERE\n");
+        if (Current->next){
+            Current = Current->next;
+        }
+    }
+    return result;
+}
+
 int Snake::GetSnakeSize(){
     return this->Size;
 }
