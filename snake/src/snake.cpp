@@ -92,9 +92,9 @@ int ** Snake::GetSnakePosition(){
     for(int i = 0; i < Size; ++i)
         result[i] = new int[1];
 
+    result[0][0] = Head->GridX;
+    result[0][1] = Head->GridX;
     if (!Head->next){
-        result[0][0] = Head->GridX;
-        result[0][1] = Head->GridX;
         return result;
     };
 
